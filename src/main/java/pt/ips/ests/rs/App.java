@@ -4,56 +4,35 @@ import java.sql.*;
 
 public class App {
     public static void main(String[] args) {
-        // Ligar a uma base de dados
-        final var connectionString = "jdbc:sqlite:C:\\Users\\amgs\\dev\\ests\\rs\\sqlite-example\\database.sqlite";
-        Connection connection = null;
-        try {
-            connection= DriverManager.getConnection(connectionString);
-        } catch(SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        // Executar uma query (SELECT)
-
         // 1. Definir a query num String
         final String query = "SELECT * FROM contracts;";
+        try {
+            printDescriptions(query);
+        } catch(SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void printDescriptions(String query) throws SQLException {
+        // Ligar a uma base de dados
+        final var connectionString = "jdbc:sqlite:C:\\Users\\amgs\\dev\\ests\\rs\\sqlite-example\\database.sqlite";
+        Connection connection = DriverManager.getConnection(connectionString);
+        // Executar uma query (SELECT)
 
         // 2. Obter um statement
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-        } catch(SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        Statement statement =  connection.createStatement();
 
         // 3. Executar o statement
-        try {
-            statement.execute(query);
-        } catch(SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        statement.execute(query);
 
         // Mostrar o resultado (Result Set)
-        ResultSet resultSet = null;
-        try {
-            resultSet = statement.getResultSet();
-        } catch(SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        ResultSet resultSet =  statement.getResultSet();
 
-        try {
-            while(resultSet.next()) {
-                final String descripion = resultSet.getString("description");
-                System.out.println(descripion);
-            }
-        } catch(SQLException throwables) {
-            throwables.printStackTrace();
+        while(resultSet.next()) {
+            System.out.println(resultSet.getString("description"));
         }
 
         // Desligar a ligação
-        try {
-            connection.close();
-        } catch(SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        connection.close();
     }
 }
