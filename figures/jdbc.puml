@@ -13,7 +13,11 @@ Client -> java.sql.Statement : statement.execute(query)
 group Driver Dependent
     autonumber resume
     java.sql.Statement -> java.sql.Connection : execute(query)
-    java.sql.Connection -> java.sql.Connection : responseData = <b>send query to database
+    database Database
+    autonumber stop
+    java.sql.Connection -> Database : <b>send query to database
+    autonumber resume
+    return responseData
     java.sql.Connection -> java.sql.ResultSet ** : resultSet = create(responseData)
     autonumber stop
     java.sql.Connection --> java.sql.Statement : resultSet
