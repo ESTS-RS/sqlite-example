@@ -1,0 +1,22 @@
+@startuml jdbc
+autonumber "<b>[0]"
+Client -> Client : conStr = "jdbc:<driver>:<path & credentials>"
+Client -> Client : query = "SELECT ... | UPDATE ... | ..."
+autonumber stop
+Client -> java.sql.DriverManager : getConnection(conStr)
+java.sql.DriverManager -> java.sql.Connection ** : connection create(conStr)
+java.sql.DriverManager --> Client : connection
+Client -> java.sql.Connection : connection.createStatement()
+java.sql.Connection -> java.sql.Statement ** : statement = create()
+java.sql.Connection --> Client : statement
+Client -> java.sql.Statement : statement.execute(query)
+group Driver Dependent
+    autonumber resume
+    java.sql.Statement -> java.sql.Connection : execute(query)
+    java.sql.Connection -> java.sql.Connection : responseData = <b>send query to database
+    java.sql.Connection -> java.sql.ResultSet ** : resultSet = create(responseData)
+    autonumber stop
+    java.sql.Connection --> java.sql.Statement : resultSet
+end
+java.sql.Statement --> Client : resultSet
+@enduml
