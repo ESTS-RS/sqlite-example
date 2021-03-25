@@ -28,6 +28,19 @@ O diálogo com uma base segue o seguinte modelo:
 </dependency>
 ```
 
+## Requisitos
+- [SQLite 3](https://sqlite.org/download.html)
+- [JDK 11](https://jdk.java.net/java-se-ri/11)
+- [Maven](https://maven.apache.org/download.cgi)
+
+## Utilização
+```bash
+git clone https://github.com/ESTS-RS/sqlite-example
+cd sqlite-example
+sqlite3 database.sqlite ".read database.sql"
+mvn compile exec:java
+```
+
 ## Licença
 Copyright 2021 André Sabino
 

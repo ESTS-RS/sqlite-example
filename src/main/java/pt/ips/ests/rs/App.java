@@ -15,7 +15,7 @@ public class App {
 
     public static void printDescriptions(String query) throws SQLException {
         // Ligar a uma base de dados
-        final var connectionString = "jdbc:sqlite:C:\\Users\\amgs\\dev\\ests\\rs\\sqlite-example\\database.sqlite";
+        final var connectionString = "jdbc:sqlite:database.sqlite";
         Connection connection = DriverManager.getConnection(connectionString);
         // Executar uma query (SELECT)
 
