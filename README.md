@@ -8,7 +8,7 @@ JDBC abstrai a invocação de métodos com uma BD específica, oferecendo uma AP
 
 ### Diálogo
 
-O diálogo com uma base segue o seguinte modelo.
+O diálogo com uma base segue o seguinte modelo:
 
 ![](figures/jdbc.png)
 
@@ -16,7 +16,17 @@ O diálogo com uma base segue o seguinte modelo.
 - [2] A query a executar é uma expressão SQL válida qualquer.
 - [3] A execução da query é específica da base utilizada. Cada *driver* implemente um protocolo específico, que pode envolver, nomeadamente, a invocação de bibliotecas locais, ou invocação remota de métodos.
 - [4] Os dados recebidos da base de dados, como resultado da *query*, estão num formato específico da base, e têm que ser normalizados.
-- [5] A normalização é feita recorrendo ao padrão básico *Record Set*, representado pela interface `java.sql.ResultSet`.
+- [5] A normalização é feita recorrendo ao padrão básico *Record Set*, representado pela interface [`java.sql.ResultSet`](https://docs.oracle.com/en/java/javase/11/docs/api/java.sql/java/sql/ResultSet.html).
+
+### Dependência Maven
+```xml
+<!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+<dependency>
+  <groupId>org.xerial</groupId>
+  <artifactId>sqlite-jdbc</artifactId>
+  <version>3.34.0</version>
+</dependency>
+```
 
 ## Licença
 Copyright 2021 André Sabino
